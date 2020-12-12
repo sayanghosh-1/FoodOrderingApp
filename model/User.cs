@@ -42,7 +42,7 @@ namespace FoodOrderingApp
         //ToString Method Overridden from Object class
         public override string ToString()
         {
-            return string.Format(this._userId + "\t" + "\t"+ this._userName.FirstWordCapitalize() + "\t" + "\t" + this._userPassword+ "\t" + "\t" + this._userBalance + "\t" + "\t" + this._userAddress + "\t" + "\t" + this._userNumber);
+            return string.Format("   " + this._userId + "\t" + "\t"+ this._userName.FirstWordCapitalize() + "\t" + "\t" + this._userPassword+ "\t" + "\t" + this._userBalance + "\t" + "\t" + this._userAddress + "\t" + "\t" + this._userNumber);
         }
 
         //Equals Method Overridden from Object class

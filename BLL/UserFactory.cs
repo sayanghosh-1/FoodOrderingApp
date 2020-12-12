@@ -9,6 +9,23 @@ namespace FoodOrderingApp
     class UserFactory
     {
         static List<User> usr = new List<User>();
+        public static string UserSignup(int userId, string userName, string userPassword, double userBal, string userAddress, string userNumber, List<User> usr)
+        {
+            string msg = " ";
+            foreach (var u in usr)
+            {
+                if (u.UserId != userId)
+                {
+                    usr.Add(new User(userId, userName, userPassword, userBal, userAddress, userNumber));
+                    msg = "ThankYou ! " + userName + ", You have Successfully Created a New Account !";
+                }
+                else
+                {
+                    msg = "The user Id is Already taken, Please try something else !";
+                }
+            }
+            return msg;
+        }
         public static double AddMoney(int uid, double amt, List<User> usr)
         {
             foreach (var u in usr)
@@ -30,7 +47,9 @@ namespace FoodOrderingApp
                 {
                     if (u.UserPassword == password)
                     {
-                        Console.WriteLine("Successfuly Logged In..");
+                        Console.WriteLine("----------------------------------------------------------------------------------------------");
+                        Console.WriteLine("                             SUCCESSFULLY LOGGED IN !!!                                       ");
+                        Console.WriteLine("----------------------------------------------------------------------------------------------");
                         return true;
                     }
                     else
@@ -43,7 +62,6 @@ namespace FoodOrderingApp
             Console.WriteLine("Incorrect User ID. Try again...");
             return false;
         }
-
         public static string showUserDetails(int uid, List<User> usr)
         {
             string user="";

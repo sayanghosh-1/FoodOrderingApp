@@ -10,10 +10,6 @@ namespace FoodOrderingApp.factory
     class OrdersFactory
     {
         static List<Orders> orders = new List<Orders>();
-        public static Orders[] orderDeatils(List<Orders> orders)
-        {
-            return orders.ToArray();
-        }
 
         public static bool FoodOrder(int uid, List<User> user, int fid, List<Food> food, int vid, int quantity, List<Orders> orders)
         {
@@ -103,6 +99,50 @@ namespace FoodOrderingApp.factory
                 }
             }
             throw new UserDefinedException("Unable to cancel Order. User ID is not correct..");
+        }
+        public static Orders[] orderDeatils(List<Orders> orders)
+        {
+            return orders.ToArray();
+        }
+        public static string updateStatus(int orderId, string orderStatus, List<Orders> orders)
+        {
+            string msg = " ";
+            if (orderStatus == "Y" || orderStatus == "y")
+            {
+                foreach (var o in orders)
+                {
+                    if (o.orderId == orderId)
+                    {
+                        o.orderStatus = "Approved";
+                        msg = "Order Id " + orderId + " has been Approved !";
+                    }
+                    else
+                    {
+                        msg = "Please enter a valid Order Id";
+                    }
+                }
+            }
+            else if (orderStatus == "n" || orderStatus == "N")
+            {
+                foreach (var o in orders)
+                {
+                    if (o.orderId == orderId)
+                    {
+                        o.orderStatus = "Cancelled";
+                        msg = "Order Id " + orderId + " has been Cancelled !";
+                    }
+                    else
+                    {
+                        msg = "Please enter a valid Order Id";
+                    }
+                }
+            }
+            else
+            {
+                msg = "Please Enter Y or N !";
+            }
+            return msg;
+
         }
     }
 }

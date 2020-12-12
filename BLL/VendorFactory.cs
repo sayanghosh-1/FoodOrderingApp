@@ -15,7 +15,9 @@ namespace FoodOrderingApp.factory
             {
                 if (v.vendorPassword == vendorPassword)
                 {
-                    Console.WriteLine("Successfuly Logged In..!");
+                    Console.WriteLine("----------------------------------------------------------------------------------------------");
+                    Console.WriteLine("                             SUCCESSFULLY LOGGED IN !!!                                       ");
+                    Console.WriteLine("----------------------------------------------------------------------------------------------");
                     return true;
                 }
                 else
@@ -24,10 +26,10 @@ namespace FoodOrderingApp.factory
                     return false;
                 }
             }
-            Console.WriteLine("Incorrect Vendor ID. Try again...");
+            Console.WriteLine("Incorrect Vendor Id Try again...");
             return false;
         }
-        public static string vendorDetails()
+        public static string vendorDeatils()
         {
             return vendor.ToString();
         }
