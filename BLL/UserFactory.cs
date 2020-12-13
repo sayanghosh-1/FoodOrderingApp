@@ -89,5 +89,11 @@ namespace FoodOrderingApp
             }
             return mail;
         }
+
+        public static string generateOTP()
+        {
+            Random rnd = new Random();
+            return rnd.Next(1000, 9999).ToString();
+        }
     }
 }
