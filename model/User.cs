@@ -21,6 +21,7 @@ namespace FoodOrderingApp
         private double _userBalance;
         private string _userAddress;
         private string _userNumber;
+        private string _userEmail;
 
         //Default Constructor
         public User()
@@ -29,7 +30,7 @@ namespace FoodOrderingApp
         }
 
         //Parameterized Constructor for object creation with values.
-        public User(int userId, string userName, string userPassword, double userBalance, string userAddress, string userNumber)
+        public User(int userId, string userName, string userPassword, double userBalance, string userAddress, string userNumber, string userEmail)
         {
             this._userId = userId;
             this._userName = userName;
@@ -37,6 +38,7 @@ namespace FoodOrderingApp
             this._userBalance = userBalance;
             this._userAddress = userAddress;
             this._userNumber = userNumber;
+            this._userEmail = userEmail;
         }
 
         //ToString Method Overridden from Object class
@@ -57,14 +59,15 @@ namespace FoodOrderingApp
                 User u = (User)obj;
                 return (_userId == u._userId) && (_userName == u._userName) && (_userPassword == u._userPassword)
                     && (_userBalance == u._userBalance) && (_userAddress == u._userAddress)
-                    && (_userNumber == u._userNumber);
+                    && (_userNumber == u._userNumber)
+                    && (_userEmail == u._userEmail);
             }
         }
 
         //HashCode Method Overridden from Object class
         public override int GetHashCode()
         {
-            User u1 = new User(101, "Sayan", "sayan123", 10000, "KGP", "9768373882");
+            User u1 = new User(101, "Sayan", "sayan123", 10000, "KGP", "9768373882", "ghoshsayan52@gmail.com");
             User u2 = u1;
             if (u1 == u2)
             {
@@ -155,6 +158,18 @@ namespace FoodOrderingApp
             set
             {
                 this._userNumber = value;
+
+            }
+        }
+        public string UserEmail
+        {
+            get
+            {
+                return this._userEmail;
+            }
+            set
+            {
+                this._userEmail = value;
 
             }
         }

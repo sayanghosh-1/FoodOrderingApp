@@ -9,20 +9,30 @@ namespace FoodOrderingApp
     class UserFactory
     {
         static List<User> usr = new List<User>();
-        public static string UserSignup(int userId, string userName, string userPassword, double userBal, string userAddress, string userNumber, List<User> usr)
+        public static string UserSignup(int userId, string userName, string userPassword, double userBal, string userAddress, string userNumber, string userEmail, List<User> usr)
         {
             string msg = " ";
+            bool checker = false;
             foreach (var u in usr)
             {
-                if (u.UserId != userId)
+                if (u.UserId == userId)
                 {
-                    usr.Add(new User(userId, userName, userPassword, userBal, userAddress, userNumber));
-                    msg = "ThankYou ! " + userName + ", You have Successfully Created a New Account !";
+                    checker = false;
+                    
                 }
                 else
                 {
-                    msg = "The user Id is Already taken, Please try something else !";
+                    checker = true;
                 }
+            }
+            if (checker == true)
+            {
+                usr.Add(new User(userId, userName, userPassword, userBal, userAddress, userNumber, userEmail));
+                msg = "ThankYou ! " + userName + ", You have Successfully Created a New Account !";
+            }
+            else
+            {
+                msg = "The user Id is Already taken, Please try something else !";
             }
             return msg;
         }
@@ -74,6 +84,18 @@ namespace FoodOrderingApp
                 }
             }
             return user;
+        }
+        public static string getMail(int uid, List<User> usr)
+        {
+            String mail = " ";
+            foreach(var u in usr)
+            {
+                if (u.UserId == uid)
+                {
+                    mail = u.UserEmail;
+                }
+            }
+            return mail;
         }
     }
 }

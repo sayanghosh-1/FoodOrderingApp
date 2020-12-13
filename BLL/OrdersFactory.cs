@@ -113,7 +113,7 @@ namespace FoodOrderingApp.factory
                 {
                     if (o.orderId == orderId)
                     {
-                        o.orderStatus = "Approved";
+                        o.orderStatus = "APPROVED";
                         msg = "Order Id " + orderId + " has been Approved !";
                     }
                     else
@@ -128,7 +128,7 @@ namespace FoodOrderingApp.factory
                 {
                     if (o.orderId == orderId)
                     {
-                        o.orderStatus = "Cancelled";
+                        o.orderStatus = "CANCELLED";
                         msg = "Order Id " + orderId + " has been Cancelled !";
                     }
                     else

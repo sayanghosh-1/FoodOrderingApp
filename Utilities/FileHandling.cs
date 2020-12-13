@@ -38,6 +38,35 @@ namespace FoodOrderingApp.utilities
                 }
             }
         }
+        public static bool UserWriter(int uid, Orders[] obj, List<User> usr)
+        {
+            bool isSuccess = false;
+            var filePath = @"D:\"+ uid +"invoice.txt";
+            using (FileStream fs = new FileStream(filePath, FileMode.CreateNew))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine("--------------------------------------------------------------------------------------------");
+                    sw.WriteLine("                               THANKYOU FOR ORDERING                                        ");
+                    sw.WriteLine("--------------------------------------------------------------------------------------------");
+                    sw.WriteLine("                               ;) ( ;                                                       ");
+                    sw.WriteLine("                               :----:     o8Oo./                                            ");
+                    sw.WriteLine("    FOOD ORDERING APP         C|====| ._o8o8o8Oo_.             BY SAYAN & ABHI              ");
+                    sw.WriteLine("                               |    |  `========/                                           ");
+                    sw.WriteLine("                               `----'   `------'                                            ");
+                    sw.WriteLine("--------------------------------------------------------------------------------------------");
+                    sw.WriteLine("order Id      vendor Id      user Id         Date & Time          Quantity      Total Amount");
+                    for (int s = 0; s < obj.Length; s++)
+                    {
+                        sw.WriteLine("-----------------------------------------------------------------------------------------------------------\n"
+                                   + "    " + obj[s].orderId + "\t" + "\t" + obj[s].vendorId + "\t" + "\t" + obj[s].userId + "\t"
+                                   + obj[s].orderDate + "\t" + "     " + obj[s].orderQuantity + "\t" + "\t" + "   " + obj[s].orderAmount);
+                    }
+                    isSuccess = true;
+                    return isSuccess;
+                }
+            }
+        }
         public static bool Readdata()
         {
             bool isSuccess = false;

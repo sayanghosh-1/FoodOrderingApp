@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace FoodOrderingApp
 {
@@ -18,16 +21,16 @@ namespace FoodOrderingApp
         
         static void Main(string[] args)
         {
-            usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882"));
-            usr.Add(new User(102, "abhi", "abhib123", 12000, "KOL", "976763882"));
-            usr.Add(new User(103, "disha", "disha123", 9000, "DEL", "976373882"));
-            usr.Add(new User(104, "ruchi", "ruchi123", 11000, "NGP", "9768373882"));
-            usr.Add(new User(105, "sarayu", "sarayu123", 8000, "BSR", "9878373882"));
+            usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882", "ghoshsayan52@gmail.com"));
+            usr.Add(new User(102, "abhi", "abhi123", 12000, "KOL", "976763882", "abhiburman20@gmail.com"));
+            usr.Add(new User(103, "disha", "disha123", 9000, "DEL", "976373882", "ghoshsayan52@gmail.com"));
+            usr.Add(new User(104, "ruchi", "ruchi123", 11000, "NGP", "9768373882", "abhiburman20@gmail.com"));
+            usr.Add(new User(105, "sarayu", "sarayu123", 8000, "BSR", "9878373882", "ghoshsayan52@gmail.com"));
 
-            orders.Add(new Orders(1001, 101, new DateTime(2020, 12, 08), 5, 1200, "Pending"));
-            orders.Add(new Orders(1001, 102, new DateTime(2020, 12, 08), 2, 600, "Pending"));
-            orders.Add(new Orders(1001, 103, new DateTime(2020, 12, 08), 4, 1000, "Pending"));
-            orders.Add(new Orders(1001, 104, new DateTime(2020, 12, 08), 1, 120, "Pending"));
+            orders.Add(new Orders(1001, 101, new DateTime(2020, 12, 08), 5, 1200, "PENDING"));
+            orders.Add(new Orders(1001, 102, new DateTime(2020, 12, 08), 2, 600, "PENDING"));
+            orders.Add(new Orders(1001, 103, new DateTime(2020, 12, 08), 4, 1000, "PENDING"));
+            orders.Add(new Orders(1001, 104, new DateTime(2020, 12, 08), 1, 120, "PENDING"));
 
             food.Add(new Food(1, "Chicken Tikka", 120, 5));
             food.Add(new Food(2, "Mutton  Tikka", 120, 3));
@@ -41,7 +44,7 @@ namespace FoodOrderingApp
             + "       C|====| ._o8o8o8Oo_.          ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████       \n"
             + "        |    |  `========/           ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██          \n"
             + "        `----'   `------'             ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████     \n"
-            + "                                                                                                                          "); 
+            + "                                                                                                                                        "); 
             Console.WriteLine("************************************************************************************************************************");
 
             // Home
@@ -49,6 +52,7 @@ namespace FoodOrderingApp
             mainObj.mainLoginDisplay();
             Console.ReadLine();
         }
+        
         private void mainLoginDisplay()
         {
             Console.WriteLine("----------------------------------------------------------------------------------------------");
@@ -174,7 +178,10 @@ namespace FoodOrderingApp
             Console.WriteLine("Enter your Phone Number");
             Console.WriteLine("--------------------------");
             string userPhone = Console.ReadLine();
-            string res = UserFactory.UserSignup(userId, userName, userPassword, userBal, userAddress, userPhone, usr);
+            Console.WriteLine("Enter your Phone Number");
+            Console.WriteLine("--------------------------");
+            string userEmail = Console.ReadLine();
+            string res = UserFactory.UserSignup(userId, userName, userPassword, userBal, userAddress, userPhone, userEmail, usr);
             Console.WriteLine(res);
         }
         private void mainUserDisplay()
@@ -423,28 +430,7 @@ namespace FoodOrderingApp
             Console.WriteLine("---------------------------------------------------------");
             Console.ReadLine();
         }
-        public  void fileHandling()
-        {
-            Console.WriteLine("--------------------------------------------------------------------");
-            Console.WriteLine("If you need an Copy of your order type 'Y' or Type 'N' to proceed !");
-            Console.WriteLine("--------------------------------------------------------------------");
-            char c = Convert.ToChar(Console.ReadLine());
-            if (c == 'y')
-            {
-                bool flag = utilities.FileHandling.Writer(orders.ToArray());
-                if (flag)
-                {
-                    Console.WriteLine("-------------------------------------------------------");
-                    Console.WriteLine("                   SUCCESS !!!                         ");
-                    Console.WriteLine("-------------------------------------------------------");
-                }
-            } else
-            {
-                Console.WriteLine("-------------------------------------------------------");
-                Console.WriteLine("                   Thank You !!!                       ");
-                Console.WriteLine("-------------------------------------------------------");
-            }
-        }
+        
         // --------------------------------------------------------------------------------------------------------------
         //                                         USER TASKS
         //*************************************************************************************************************
@@ -521,6 +507,15 @@ namespace FoodOrderingApp
                 Console.WriteLine("        Food Order Unsuccessful. Try again.");
                 Console.WriteLine("-------------------------------------------------------");
             }
+            // Faile handling
+            Program p = new Program();
+            p.UserfileHandling();
+            // mail
+            string mailTo = UserFactory.getMail(uid, usr);
+            Mail(mailTo);
+            Console.WriteLine("---------------------------------------------------------------------");
+            Console.WriteLine("     An Invoice of your Order is Mailed to " + mailTo);
+            Console.WriteLine("---------------------------------------------------------------------");
             Console.ReadLine();
         }
         public void showUserOrderDetails()
@@ -575,6 +570,76 @@ namespace FoodOrderingApp
                 Console.WriteLine("-------------------------------------------------------");
             }
             Console.ReadLine();
+        }
+        //--------------------------------------------------------------------------------------------------------------
+        //                                          Utilities
+        //**************************************************************************************************************
+        public void fileHandling()
+        {
+            Console.WriteLine("--------------------------------------------------------------------");
+            Console.WriteLine("If you need an Copy of your order type 'Y' or Type 'N' to proceed !");
+            Console.WriteLine("--------------------------------------------------------------------");
+            char c = Convert.ToChar(Console.ReadLine());
+            if (c == 'y')
+            {
+                bool flag = utilities.FileHandling.Writer(orders.ToArray());
+                if (flag)
+                {
+                    Console.WriteLine("-------------------------------------------------------");
+                    Console.WriteLine("                   SUCCESS !!!                         ");
+                    Console.WriteLine("-------------------------------------------------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("-------------------------------------------------------");
+                Console.WriteLine("                   Thank You !!!                       ");
+                Console.WriteLine("-------------------------------------------------------");
+            }
+        }
+        public void UserfileHandling()
+        {
+            Orders[] orArr = OrdersFactory.showOrders(uid, usr, orders);
+            Console.WriteLine("--------------------------------------------------------------------");
+            Console.WriteLine("If you need an Copy of your order type 'Y' or Type 'N' to proceed !");
+            Console.WriteLine("--------------------------------------------------------------------");
+            char c = Convert.ToChar(Console.ReadLine());
+            if (c == 'y')
+            {
+                bool flag = utilities.FileHandling.UserWriter(uid, orArr, usr);
+                if (flag)
+                {
+                    Console.WriteLine("-------------------------------------------------------");
+                    Console.WriteLine("                   SUCCESS !!!                         ");
+                    Console.WriteLine("-------------------------------------------------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("-------------------------------------------------------");
+                Console.WriteLine("                   Thank You !!!                       ");
+                Console.WriteLine("-------------------------------------------------------");
+            }
+        }
+        private static void Mail(string mailTo)
+        {
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("foodorderingapp2020@gmail.com");
+                mail.To.Add(mailTo);
+                mail.Subject = "PROJECT .NET : Order on FoodOrderingApp";
+                mail.Body = "<h1>Thankyou for Ordering !</h1><br>" +
+                    "<h4>Your Invoice is attached with this mail<h4>";
+                mail.IsBodyHtml = true;
+                mail.Attachments.Add(new Attachment("D:\\"+uid+"invoice.txt"));
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("foodorderingapp2020@gmail.com", "Food@2020");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
         }
     }
 }
