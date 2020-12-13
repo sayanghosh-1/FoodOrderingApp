@@ -631,7 +631,8 @@ namespace FoodOrderingApp
                 mail.Body = "<h1>Thankyou for Ordering !</h1><br>" +
                     "<h4>Your Invoice is attached with this mail<h4>";
                 mail.IsBodyHtml = true;
-                mail.Attachments.Add(new Attachment("D:\\"+uid+"invoice.txt"));
+                //mail.Attachments.Add(new Attachment("D:\\" + uid + "invoice.txt"));
+                mail.Attachments.Add(new Attachment("C:\\Users\\ghosh\\Desktop\\FoodInvoices\\" + uid+"invoice.txt"));
 
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {

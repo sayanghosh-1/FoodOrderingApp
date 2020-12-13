@@ -16,7 +16,7 @@ namespace FoodOrderingApp.Test
             // arrange
             Vendor v = new Vendor(1001, "Zomato", "zomato123", "976763882", "zomato@gmail.com", "kharaghpur");
             // act
-            bool actualValue = factory.VendorFactory.VendorLogin(101,"zomato123",v);
+            bool actualValue = factory.VendorFactory.VendorLogin(1001,"zomato123",v);
             // assert
             Assert.AreEqual(true, actualValue);
         }
