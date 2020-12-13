@@ -70,6 +70,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="BLL\UserFactory.cs" />
+    <Compile Include="Test\FoodFactoryTest.cs" />
+    <Compile Include="Test\UserFactoryTest.cs" />
     <Compile Include="Test\FileHandlingTest.cs" />
     <Compile Include="Test\OrdersFactoryTest.cs" />
     <Compile Include="Test\VendorFactoryTest.cs" />

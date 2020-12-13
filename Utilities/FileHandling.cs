@@ -12,7 +12,8 @@ namespace FoodOrderingApp.utilities
         public static bool Writer(Orders[] obj)
         {
             bool isSuccess = false;
-            var filePath = @"D:\orders.txt";
+            //var filePath = @"D:\orders.txt";
+            var filePath = @"C:\Users\ghosh\Desktop\FoodInvoices\orders.txt";
             using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
@@ -41,7 +42,8 @@ namespace FoodOrderingApp.utilities
         public static bool UserWriter(int uid, Orders[] obj, List<User> usr)
         {
             bool isSuccess = false;
-            var filePath = @"D:\"+ uid +"invoice.txt";
+            //var filePath = @"D:\" + uid + "invoice.txt";
+            var filePath = @"C:\Users\ghosh\Desktop\FoodInvoices\" + uid +"invoice.txt";
             using (FileStream fs = new FileStream(filePath, FileMode.CreateNew))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
