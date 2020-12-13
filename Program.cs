@@ -178,7 +178,7 @@ namespace FoodOrderingApp
             Console.WriteLine("Enter your Phone Number");
             Console.WriteLine("--------------------------");
             string userPhone = Console.ReadLine();
-            Console.WriteLine("Enter your Phone Number");
+            Console.WriteLine("Enter your Email");
             Console.WriteLine("--------------------------");
             string userEmail = Console.ReadLine();
             string res = UserFactory.UserSignup(userId, userName, userPassword, userBal, userAddress, userPhone, userEmail, usr);
