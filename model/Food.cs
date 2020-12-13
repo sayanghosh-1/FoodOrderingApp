@@ -40,7 +40,8 @@ namespace FoodOrderingApp
             /* return string.Format("\n Food Id = {0} \n Food Name = {1} \n Food Cost = {2} \n Food Stock = {3}",
                                   this._foodId, this._foodName, this._foodCost, this._foodStock);
              */
-            return string.Format(this._foodId + "\t" + this._foodName + "\t" + this._foodCost + "\t" + this._foodStock);
+            return string.Format("---------------------------------------------------------------\n" +
+                                "    " + this._foodId + "\t" + "   " + this._foodName + "\t" + this._foodCost + "\t" + "\t" + this._foodStock);
         }
 
         //Equals Method Overridden from Object class
@@ -61,7 +62,7 @@ namespace FoodOrderingApp
         //HashCode Method Overridden from Object class
         public override int GetHashCode()
         {
-            Food f1 = new Food(1, "Chicken Biryani", 250.50, 4);
+            Food f1 = new Food(1, "Chicken Tikka", 120, 5);
             Food f2 = f1;
             if (f1 == f2)
             {
