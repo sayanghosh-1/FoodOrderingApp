@@ -10,15 +10,23 @@ namespace FoodOrderingApp.Test
     [TestFixture]
     class VendorFactoryTest
     {
+        // arrange
+        static Vendor v = new Vendor(1001, "Zomato", "zomato123", "976763882", "zomato@gmail.com", "kharaghpur");
         [Test]
         public void When_VendorWill_Login_expects_true()
         {
-            // arrange
-            Vendor v = new Vendor(1001, "Zomato", "zomato123", "976763882", "zomato@gmail.com", "kharaghpur");
             // act
-            bool actualValue = factory.VendorFactory.VendorLogin(101,"zomato123",v);
+            bool actualValue = factory.VendorFactory.VendorLogin(1001,"zomato123",v);
             // assert
             Assert.AreEqual(true, actualValue);
+        }
+        [Test]
+        public void vendorDeatils()
+        {
+            // act
+            string actualvalue = factory.VendorFactory.vendorDeatils();
+            // assert
+            Assert.AreEqual(v.ToString(), actualvalue);
         }
     }
 }
