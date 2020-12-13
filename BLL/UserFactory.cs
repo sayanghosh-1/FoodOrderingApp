@@ -21,7 +21,7 @@ namespace FoodOrderingApp
                     msg = "The user Id is Already taken, Please try something else !";
                 }
             }
-            if (checker == true)
+            if (checker == false)
             {
                 usr.Add(new User(userId, userName, userPassword, userBal, userAddress, userNumber, userEmail));
                 msg = "ThankYou ! " + userName + ", You have Successfully Created a New Account !";

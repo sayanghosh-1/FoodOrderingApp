@@ -56,7 +56,7 @@ namespace FoodOrderingApp.utilities
                     sw.WriteLine("                               `----'   `------'                                            ");
                     sw.WriteLine("--------------------------------------------------------------------------------------------");
                     sw.WriteLine("order Id      vendor Id      user Id         Date & Time          Quantity      Total Amount");
-                    for (int s = 0; s < obj.Length; s++)
+                    for (int s = obj.Length-1; s < obj.Length; s++)
                     {
                         sw.WriteLine("-----------------------------------------------------------------------------------------------------------\n"
                                    + "    " + obj[s].orderId + "\t" + "\t" + obj[s].vendorId + "\t" + "\t" + obj[s].userId + "\t"
@@ -67,7 +67,7 @@ namespace FoodOrderingApp.utilities
                 }
             }
         }
-        public static bool Readdata()
+        public static bool Readdata(Orders[] obj)
         {
             bool isSuccess = false;
             var filePath = @"D:\invoice.txt";
