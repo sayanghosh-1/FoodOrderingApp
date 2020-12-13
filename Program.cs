@@ -48,8 +48,7 @@ namespace FoodOrderingApp
             Console.WriteLine("************************************************************************************************************************");
 
             // Home
-            
-
+ 
             Program mainObj = new Program();
             mainObj.mainLoginDisplay();
             Console.ReadLine();
@@ -183,8 +182,23 @@ namespace FoodOrderingApp
             Console.WriteLine("Enter your Email");
             Console.WriteLine("--------------------------");
             string userEmail = Console.ReadLine();
-            string res = UserFactory.UserSignup(userId, userName, userPassword, userBal, userAddress, userPhone, userEmail, usr);
-            Console.WriteLine(res);
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Generating OTP. Please Hold on...");
+            string otp = UserFactory.generateOTP();
+            OTP(userEmail, otp);
+            Console.WriteLine("----------------------------------------------------------------");
+            Console.WriteLine("Enter the OTP sent to " +userEmail+" for account validation..");
+            Console.WriteLine("----------------------------------------------------------------");
+            string otpInput = Console.ReadLine();
+            if(otpInput == otp)
+            {
+                string res = UserFactory.UserSignup(userId, userName, userPassword, userBal, userAddress, userPhone, userEmail, usr);
+                Console.WriteLine(res);
+            }
+            else
+            {
+                Console.WriteLine("Invalid OTP. Unable to Create your account. Please try again..");
+            }
         }
         private void mainUserDisplay()
         {
@@ -197,7 +211,8 @@ namespace FoodOrderingApp
             Console.WriteLine("5. Order Food");
             Console.WriteLine("6. Show Previous Order Details of User");
             Console.WriteLine("7. Cancel an Ordered Food");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("8. Logout");
+            Console.WriteLine("9. Exit");
             Console.WriteLine("----------------------------------------------------------------------------------------------");
             mainUserChoice();
         }
@@ -239,6 +254,10 @@ namespace FoodOrderingApp
                         break;
 
                     case 8:
+                        logout();
+                        break;
+
+                    case 9:
                         Environment.Exit(0);
                         break;
                     default:
@@ -633,8 +652,8 @@ namespace FoodOrderingApp
                 mail.Body = "<h1>Thankyou for Ordering !</h1><br>" +
                     "<h4>Your Invoice is attached with this mail<h4>";
                 mail.IsBodyHtml = true;
-                mail.Attachments.Add(new Attachment("D:\\" + DateTime.Now.ToString("hh_mm_tt_") + uid + "_invoice.txt"));
-                // mail.Attachments.Add(new Attachment("C:\\Users\\ghosh\\Desktop\\FoodInvoices\\" + uid+"invoice.txt"));
+                //mail.Attachments.Add(new Attachment("D:\\" + DateTime.Now.ToString("hh_mm_tt_") + uid + "_invoice.txt"));
+                mail.Attachments.Add(new Attachment("C:\\Users\\ghosh\\Desktop\\FoodInvoices\\"+ DateTime.Now.ToString("hh_mm_tt_") + uid+"invoice.txt"));
 
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
@@ -643,6 +662,30 @@ namespace FoodOrderingApp
                     smtp.Send(mail);
                 }
             }
+        }
+
+        private static void OTP(string mailTo, string otp)
+        {
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("foodorderingapp2020@gmail.com");
+                mail.To.Add(mailTo);
+                mail.Subject = "PROJECT .NET : OTP Verification";
+                mail.Body = "<h1>Never share your OTP with anyone else!</h1><br>" +
+                    "<h4>Your OTP is :<h4><br>" + "<h1>"+otp+"</h1>";
+                mail.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("foodorderingapp2020@gmail.com", "Food@2020");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
+        }
+
+        private void logout()
+        {
+            mainLoginDisplay();
         }
     }
 }
