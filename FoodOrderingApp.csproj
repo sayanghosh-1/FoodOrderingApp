@@ -63,6 +63,7 @@
     <Compile Include="BLL\FoodFactory.cs" />
     <Compile Include="BLL\OrdersFactory.cs" />
     <Compile Include="BLL\VendorFactory.cs" />
+    <Compile Include="DBLL\vendorDbll.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\Orders.cs" />
     <Compile Include="Model\Vendor.cs" />

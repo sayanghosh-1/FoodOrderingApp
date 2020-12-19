@@ -20,16 +20,17 @@ namespace FoodOrderingApp.Test
             // assert
             Assert.AreEqual(true, actualvalue);
         }
-        //[Test]
-        //public void UserWriter()
-        //{
-        //    //arrange
-        //    orders.Add(new Orders(1001, 101, new DateTime(2020, 12, 08), 5, 1200, "PENDING"));
-        //    usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882", "ghoshsayan52@gmail.com"));
-        //    // act
-        //    bool actualvalue = utilities.FileHandling.UserWriter(101, orders.ToArray(), usr);
-        //    // assert
-        //    Assert.AreEqual(true, actualvalue);
-        //}
+        [Test]
+        [Ignore(reason: "Will Figure out to handle Dynamic test operations.")]
+        public void UserWriter()
+        {
+            //arrange
+            orders.Add(new Orders(1001, 101, new DateTime(2020, 12, 08), 5, 1200, "PENDING"));
+            usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882", "ghoshsayan52@gmail.com"));
+            // act
+            bool actualvalue = utilities.FileHandling.UserWriter(101, orders.ToArray(), usr);
+            // assert
+            Assert.AreEqual(true, actualvalue);
+        }
     }
 }

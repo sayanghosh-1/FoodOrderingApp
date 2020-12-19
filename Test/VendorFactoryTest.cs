@@ -18,7 +18,8 @@ namespace FoodOrderingApp.Test
             // act
             bool actualValue = factory.VendorFactory.VendorLogin(1001,"zomato123",v);
             // assert
-            Assert.AreEqual(true, actualValue);
+            //Assert.AreEqual(true, actualValue);
+            Assert.That(true, Is.EqualTo(actualValue));
         }
         [Test]
         public void vendorDeatils()
@@ -26,7 +27,8 @@ namespace FoodOrderingApp.Test
             // act
             string actualvalue = factory.VendorFactory.vendorDeatils();
             // assert
-            Assert.AreEqual(v.ToString(), actualvalue);
+            //Assert.AreEqual(v.ToString(), actualvalue);
+            Assert.That(v.ToString(), Is.EqualTo(actualvalue));
         }
     }
 }

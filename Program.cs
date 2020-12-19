@@ -26,6 +26,7 @@ namespace FoodOrderingApp
             usr.Add(new User(103, "disha", "disha123", 9000, "DEL", "976373882", "ghoshsayan52@gmail.com"));
             usr.Add(new User(104, "ruchi", "ruchi123", 11000, "NGP", "9768373882", "abhiburman20@gmail.com"));
             usr.Add(new User(105, "sarayu", "sarayu123", 8000, "BSR", "9878373882", "ghoshsayan52@gmail.com"));
+            usr.Add(new User(106, "narmadha", "narmadha123", 8000, "CHN", "9878373882", "narmadha.raju@gmail.com"));
 
             orders.Add(new Orders(1001, 101, new DateTime(2020, 12, 08), 5, 1200, "PENDING"));
             orders.Add(new Orders(1001, 102, new DateTime(2020, 12, 08), 2, 600, "PENDING"));
@@ -533,6 +534,7 @@ namespace FoodOrderingApp
             p.UserfileHandling();
             // mail
             string mailTo = UserFactory.getMail(uid, usr);
+            Console.WriteLine("           We are mailing your order details ...");
             Mail(mailTo);
             Console.WriteLine("---------------------------------------------------------------------");
             Console.WriteLine("     An Invoice of your Order is Mailed to " + mailTo);
@@ -652,8 +654,8 @@ namespace FoodOrderingApp
                 mail.Body = "<h1>Thankyou for Ordering !</h1><br>" +
                     "<h4>Your Invoice is attached with this mail<h4>";
                 mail.IsBodyHtml = true;
-                //mail.Attachments.Add(new Attachment("D:\\" + DateTime.Now.ToString("hh_mm_tt_") + uid + "_invoice.txt"));
-                mail.Attachments.Add(new Attachment("C:\\Users\\ghosh\\Desktop\\FoodInvoices\\"+ DateTime.Now.ToString("hh_mm_tt_") + uid+"invoice.txt"));
+                mail.Attachments.Add(new Attachment("D:\\" + DateTime.Now.ToString("hh_mm_tt_") + uid + "_invoice.txt"));
+                //mail.Attachments.Add(new Attachment("C:\\Users\\ghosh\\Desktop\\FoodInvoices\\"+ DateTime.Now.ToString("hh_mm_tt_") + uid+"invoice.txt"));
 
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
