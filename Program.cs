@@ -485,7 +485,7 @@ namespace FoodOrderingApp
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
             Console.WriteLine("\n User ID       User Name       User Password         User Balance   User Address     User Phone");
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
-            string user = UserFactory.showUserDetails(uid, usr);
+            bool user = UserFactory.showUserDetails(uid);
             Console.WriteLine("\n"+user);
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
             Console.ReadLine();

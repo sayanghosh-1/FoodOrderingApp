@@ -25,7 +25,7 @@ namespace FoodOrderingApp.factory
                             {
                                 double amount = f.FoodCost * quantity;
                                 Console.WriteLine("\n Total Amount to be paid = Rs. " + amount);
-                                orders.Add(new Orders(vid, uid, DateTime.Today, quantity, amount, "PENDING"));
+                                orders.Add(new Orders(vid, uid, DateTime.Now, quantity, amount, "PENDING"));
                                 u.UserBalance = u.UserBalance - amount;
                                 Console.WriteLine("\n Remaining Wallet Balance = Rs. " + u.UserBalance);
                                 f.FoodStock = f.FoodStock - quantity;

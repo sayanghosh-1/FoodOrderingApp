@@ -50,6 +50,7 @@
       <HintPath>packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +64,8 @@
     <Compile Include="BLL\FoodFactory.cs" />
     <Compile Include="BLL\OrdersFactory.cs" />
     <Compile Include="BLL\VendorFactory.cs" />
+    <Compile Include="DBLL\DBConnection.cs" />
+    <Compile Include="DBLL\UserDAO.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\Orders.cs" />
     <Compile Include="Model\Vendor.cs" />

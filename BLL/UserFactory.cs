@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodOrderingApp.DBLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,9 +65,9 @@ namespace FoodOrderingApp
             Console.WriteLine("Incorrect User ID. Try again...");
             return false;
         }
-        public static string showUserDetails(int uid, List<User> usr)
+        public static bool showUserDetails(int uid)
         {
-            string user="";
+            /*string user="";
             foreach(var u in usr)
             {
                 if(u.UserId == uid)
@@ -75,7 +76,13 @@ namespace FoodOrderingApp
 
                 }
             }
-            return user;
+            return user;*/
+            bool res = UserDAO.showDetails(uid);
+            if (res)
+            {
+                return true;
+            }
+            return false;
         }
         public static string getMail(int uid, List<User> usr)
         {
