@@ -79,62 +79,77 @@ namespace FoodOrderingApp.factory
             }
             return ord.ToArray();
         }
-        public static bool cancelUserOrder(int uid, List<User> user, int oid, List<Orders> orders)
+        public static bool cancelUserOrder(int uid, int oid)
         {
-
-            Orders[] ord = cancellableOrders(uid, user, orders);
-            foreach(var u in user)
+            bool flag = false;
+            bool ord = DBLL.OrderDAO.orderDetailsUser(uid);
+            if (ord == true)
             {
-                if(u.UserId == uid)
+                bool cancelOrd = DBLL.OrderDAO.orderCancel(oid);
+                if ( cancelOrd == true)
                 {
-                    foreach(var o in ord)
-                    {
-                        if(o.orderId == oid)
-                        {
-                            orders.Remove(o);
-                            return true;
-                        }
-                    }
-                    throw new UserDefinedException("Unable to cancel Order. Order ID is not correct..");
+                    flag = true;
                 }
             }
-            throw new UserDefinedException("Unable to cancel Order. User ID is not correct..");
+            return flag;
+            //foreach(var u in user)
+            //{
+            //    if(u.UserId == uid)
+            //    {
+            //        foreach(var o in ord)
+            //        {
+            //            if(o.orderId == oid)
+            //            {
+            //                orders.Remove(o);
+            //                return true;
+            //            }
+            //        }
+            //        throw new UserDefinedException("Unable to cancel Order. Order ID is not correct..");
+            //    }
+            //}
+            //throw new UserDefinedException("Unable to cancel Order. User ID is not correct..");
         }
-        public static Orders[] orderDeatils(List<Orders> orders)
+        public static bool orderDeatils()
         {
-            return orders.ToArray();
+            bool success = false;
+            bool getOrder = DBLL.OrderDAO.orderDetails();
+            if(getOrder == true)
+            {
+                success = true;
+            }
+            return success;
         }
-        public static string updateStatus(int orderId, string orderStatus, List<Orders> orders)
+        public static string updateStatus(int orderId, string orderStatus)
         {
             string msg = " ";
+            string Status = "";
             if (orderStatus == "Y" || orderStatus == "y")
             {
-                foreach (var o in orders)
+                Status = "APPROVED";
+                bool statusCheck = DBLL.OrderDAO.orderUpdateAvail(orderId, Status);
+                Console.WriteLine(statusCheck);
+                if (statusCheck == true)
                 {
-                    if (o.orderId == orderId)
-                    {
-                        o.orderStatus = "APPROVED";
-                        msg = "Order Id " + orderId + " has been Approved !";
-                    }
-                    else
-                    {
-                        msg = "Please enter a valid Order Id";
-                    }
+                    msg = "Order Id " + orderId + " has been Approved !";
+                }
+                else
+                {
+                    msg = "Please enter a valid Order Id";
                 }
             }
             else if (orderStatus == "n" || orderStatus == "N")
             {
-                foreach (var o in orders)
+                
+                Status = "CANCELLED";
+                bool statusCheck = DBLL.OrderDAO.orderUpdateAvail(orderId, Status);
+                Console.WriteLine(statusCheck);
+                if (statusCheck == true)
                 {
-                    if (o.orderId == orderId)
-                    {
-                        o.orderStatus = "CANCELLED";
-                        msg = "Order Id " + orderId + " has been Cancelled !";
-                    }
-                    else
-                    {
-                        msg = "Please enter a valid Order Id";
-                    }
+                    msg = "Order Id " + orderId + " has been Cancelled !";
+                }
+                else
+                {
+                    msg = "Please enter a valid Order Id";
                 }
             }
             else

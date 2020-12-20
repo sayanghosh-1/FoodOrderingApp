@@ -14,11 +14,9 @@ namespace FoodOrderingApp.Test
         [Test]
         public void Show_Food_Details()
         {
-            List<Food> food = new List<Food>();
-            food.Add(new Food(1, "Chicken Tikka", 120, 5));
-            Food[] actualvalue = factory.FoodFactory.showFood(food);
+            bool actualvalue = factory.FoodFactory.showFood();
             // assert
-            Assert.AreEqual(food, actualvalue);
+            Assert.AreEqual(true, actualvalue);
         }
 
         [Test]

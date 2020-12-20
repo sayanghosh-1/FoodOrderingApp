@@ -49,7 +49,7 @@ namespace FoodOrderingApp.Test
             orders.Add(new Orders(1001, 101, new DateTime(2020, 12, 08), 5, 1200, "PENDING"));
             usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882", "ghoshsayan52@gmail.com"));
             // act
-            bool actualvalue = factory.OrdersFactory.cancelUserOrder(101, usr, orders.ElementAt(0).orderId, orders);
+            bool actualvalue = factory.OrdersFactory.cancelUserOrder(101, orders.ElementAt(0).orderId);
             // assert
             Assert.AreEqual(true, actualvalue);
         }
@@ -57,15 +57,15 @@ namespace FoodOrderingApp.Test
         public void orderDeatils()
         {
             // act
-            Orders[] actualvalue = factory.OrdersFactory.orderDeatils(orders);
+            bool actualvalue = factory.OrdersFactory.orderDeatils();
             // assert
-            Assert.AreEqual(orders, actualvalue);
+            Assert.AreEqual(true, actualvalue);
         }
         [Test]
         public void updateStatus()
         {
             //act
-            String actualvalue = factory.OrdersFactory.updateStatus(1, "ACCEPTED", orders);
+            String actualvalue = factory.OrdersFactory.updateStatus(1, "ACCEPTED");
             // assert
             Assert.AreEqual("Please Enter Y or N !", actualvalue);
         }

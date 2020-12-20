@@ -16,7 +16,7 @@ namespace FoodOrderingApp.Test
         public void When_VendorWill_Login_expects_true()
         {
             // act
-            bool actualValue = factory.VendorFactory.VendorLogin(1001,"zomato123",v);
+            bool actualValue = factory.VendorFactory.VendorLogin(1001,"zomato123");
             // assert
             //Assert.AreEqual(true, actualValue);
             Assert.That(true, Is.EqualTo(actualValue));
@@ -25,7 +25,7 @@ namespace FoodOrderingApp.Test
         public void vendorDeatils()
         {
             // act
-            string actualvalue = factory.VendorFactory.vendorDeatils();
+            bool actualvalue = factory.VendorFactory.vendorDeatils();
             // assert
             //Assert.AreEqual(v.ToString(), actualvalue);
             Assert.That(v.ToString(), Is.EqualTo(actualvalue));

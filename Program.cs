@@ -18,7 +18,6 @@ namespace FoodOrderingApp
         static List<Food> food = new List<Food>();
         static List<Orders> orders = new List<Orders>();
         static Vendor vendor = new Vendor(1001, "Zomato", "zomato123", "976763882", "zomato@gmail.com", "Kharagpur");
-        
         static void Main(string[] args)
         {
             usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882", "ghoshsayan52@gmail.com"));
@@ -113,7 +112,7 @@ namespace FoodOrderingApp
                 Console.WriteLine("Enter your Password");
                 Console.WriteLine("--------------------------");
                 string password = Console.ReadLine();
-                bool res = UserFactory.UserLogin(uid, password, usr);
+                bool res = UserFactory.UserLogin(uid, password);
                 if (res == true)
                 {
                     mainUserDisplay();
@@ -134,7 +133,7 @@ namespace FoodOrderingApp
                 Console.WriteLine("Enter your Password");
                 Console.WriteLine("--------------------------");
                 string vendorPassword = Console.ReadLine();
-                bool res = VendorFactory.VendorLogin(vendorId, vendorPassword, vendor);
+                bool res = VendorFactory.VendorLogin(vendorId, vendorPassword);
                 if (res == true)
                 {
                     mainVendorDisplay();
@@ -337,7 +336,7 @@ namespace FoodOrderingApp
             Console.WriteLine("\n");
             mainVendorDisplay();
         }
-        public void showVendorDetails()
+        public static void showVendorDetails()
         {
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("Welcome " + vendor.vendorName + " !!!");
@@ -351,12 +350,9 @@ namespace FoodOrderingApp
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
             Console.WriteLine("                                         ORDERS HISTORY DETAILS                                          ");
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
-            Orders[] orArr = OrdersFactory.orderDeatils(orders);
             Console.WriteLine("order Id      vendor Id      user Id         Date & Time          Quantity      Total Amount      Status");
-            foreach (var o in orArr)
-            {
-                Console.WriteLine(o.ToString());
-            }
+            bool orArr = OrdersFactory.orderDeatils();
+            Console.WriteLine(orArr);
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
             fileHandling();
             Console.ReadLine();
@@ -366,12 +362,9 @@ namespace FoodOrderingApp
             Console.WriteLine("-------------------------------------------------------");
             Console.WriteLine("                 FOOD DETAILS                          ");
             Console.WriteLine("-------------------------------------------------------");
-            Food[] foodArr = FoodFactory.showFood(food);
             Console.WriteLine("Food Id      Food Name      Food Cost        Food Stock");
-            foreach (var f in foodArr)
-            {
-                Console.WriteLine(f.ToString());
-            }
+            bool foodArr = FoodFactory.showFood();
+            Console.WriteLine(foodArr);
             Console.WriteLine("---------------------------------------------------------");
             Console.ReadLine();
         }
@@ -446,7 +439,7 @@ namespace FoodOrderingApp
             Console.WriteLine("---------------------");
             Console.WriteLine("Enter 'Y' to Accept or 'N' to Cancel Order");
             string orderStatus = Console.ReadLine();
-            string msg = OrdersFactory.updateStatus(orderId, orderStatus, orders);
+            string msg = OrdersFactory.updateStatus(orderId, orderStatus);
             Console.WriteLine("---------------------------------------------------------");
             Console.WriteLine(msg);
             Console.WriteLine("---------------------------------------------------------");
@@ -574,7 +567,7 @@ namespace FoodOrderingApp
             bool res = false;
             try
             {
-                res = OrdersFactory.cancelUserOrder(uid, usr, oid, orders);
+                res = OrdersFactory.cancelUserOrder(uid, oid);
             }
             catch (UserDefinedException e)
             {

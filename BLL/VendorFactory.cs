@@ -8,30 +8,32 @@ namespace FoodOrderingApp.factory
 {
     class VendorFactory
     {
-        static Vendor vendor = new Vendor(1001, "Zomato", "zomato123", "976763882", "zomato@gmail.com", "kharaghpur");
-        public static bool VendorLogin(int vendorId, string vendorPassword, Vendor v)
+        public static bool VendorLogin(int vendorId, string vendorPassword)
         {
-            if (v.vendorId == vendorId)
+            bool flag = false;
+            bool verify = DBLL.VendorDAO.vendorLogin(vendorId, vendorPassword);
+            if (verify == true)
             {
-                if (v.vendorPassword == vendorPassword)
-                {
-                    Console.WriteLine("----------------------------------------------------------------------------------------------");
-                    Console.WriteLine("                             SUCCESSFULLY LOGGED IN !!!                                       ");
-                    Console.WriteLine("----------------------------------------------------------------------------------------------");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Incorrect Password. Try again..");
-                    return false;
-                }
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
+                Console.WriteLine("                             SUCCESSFULLY LOGGED IN !!!                                       ");
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
+                flag = true;
             }
-            Console.WriteLine("Incorrect Vendor Id Try again...");
-            return false;
+            else
+            {
+                Console.WriteLine("Incorrect Password. Try again..");
+            }
+            return flag;
         }
-        public static string vendorDeatils()
+        public static bool vendorDeatils()
         {
-            return vendor.ToString();
+            //return vendor.ToString();
+            bool res = DBLL.VendorDAO.vendorDetails();
+            if (res)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

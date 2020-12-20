@@ -42,28 +42,22 @@ namespace FoodOrderingApp
             return 0;
         }
 
-        public static bool UserLogin(int uid, string password, List<User> usr)
+        public static bool UserLogin(int uid, string password)
         {
-            foreach (var u in usr)
+            bool flag = false;
+            bool verify = DBLL.UserDAO.UserLogin(uid, password);
+            if (verify == true)
             {
-                if(u.UserId == uid)
-                {
-                    if (u.UserPassword == password)
-                    {
-                        Console.WriteLine("----------------------------------------------------------------------------------------------");
-                        Console.WriteLine("                             SUCCESSFULLY LOGGED IN !!!                                       ");
-                        Console.WriteLine("----------------------------------------------------------------------------------------------");
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Incorrect Password. Try again..");
-                        return false;
-                    }
-                }
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
+                Console.WriteLine("                             SUCCESSFULLY LOGGED IN !!!                                       ");
+                Console.WriteLine("----------------------------------------------------------------------------------------------");
+                flag = true;
             }
-            Console.WriteLine("Incorrect User ID. Try again...");
-            return false;
+            else
+            {
+                Console.WriteLine("Incorrect Password. Try again..");
+            }
+            return flag;
         }
         public static bool showUserDetails(int uid)
         {

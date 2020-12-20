@@ -17,7 +17,7 @@ namespace FoodOrderingApp.Test
             List<User> usr = new List<User>();
             usr.Add(new User(101, "sayan", "sayan123", 13000, "KGP", "976763882", "ghoshsayan52@gmail.com"));
             // act
-            bool actualValue = UserFactory.UserLogin(101, "sayan123", usr);
+            bool actualValue = UserFactory.UserLogin(101, "sayan123");
             // assert
             Assert.AreEqual(true, actualValue);
         }

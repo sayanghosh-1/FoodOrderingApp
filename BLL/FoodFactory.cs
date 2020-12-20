@@ -10,17 +10,23 @@ namespace FoodOrderingApp.factory
     {
         List<Food> food = new List<Food>();
 
-        public static Food[] showFood(List<Food> food)
+        public static bool showFood()
         {
-            List<Food> list = new List<Food>();
-            foreach (var f in food)
+            bool success = false;
+            bool getFood = DBLL.FoodDAO.foodDetails();
+            if (getFood == true)
             {
-                if(f.FoodStock > 0)
-                {
-                    list.Add(f);
-                }
+                success = true;
             }
-            return list.ToArray();
+            return success;
+            //foreach (var f in food)
+            //{
+            //    if(f.FoodStock > 0)
+            //    {
+            //        list.Add(f);
+            //    }
+            //}
+            //return list.ToArray();
         }
         public static string addFood(int foodId, string foodName, double foodCost, int foodStock, List<Food> food)
         {
